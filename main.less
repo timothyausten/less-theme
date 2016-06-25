@@ -1,0 +1,143 @@
+@headerbackground: #a3c6e4;
+@headeraccent: #fff500;
+@footerbackground: #9aa5a5;
+@contentbackground: hsla(0, 100%, 74%, 100%);
+/*@contentbackground: #ff7979;*/
+@footerheight: 3em;
+@headerheight: 8em;
+
+@nav-list-item1: #fac5c5, #ff6a6a, #ff3434;
+@nav-list-item2: #a0dda0, #55db55, #00b900;
+@nav-list-item3: #7ab3e4, #2d8de0, #0065bc;
+@nav-list-item4: #81c8b5, #43cca7, #00986f;
+@nav-list-item5: #cb9de0, #c478e6, #a932de;
+
+* {
+    /* Using the the universal selector
+    here is okay because it is only slow
+    when combined with other selectors */
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    height: 100%;
+}
+
+body {
+    color: white;
+    margin: 0; /* Remove white margin around body */
+    font-family:
+        "Century Gothic",
+        CenturyGothic,
+        AppleGothic,
+        sans-serif;
+    min-height: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+header {
+    margin: 0; /* prevent border collapse */
+    border-bottom: 8px solid @headeraccent;
+    color: white;
+    text-align: left;
+    background-color: @headerbackground;
+    padding: 1em;
+    height: @headerheight;
+    pointer-events: auto;
+}
+
+header > h1, header > h2 {
+    text-align: left;
+    margin: 0;
+}
+
+#everything-but-footer {
+    /* A wrapper for everything but footer */
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Bottom margin is
+    negative footer height */
+    margin: 0 auto -1 * @footerheight;
+    position: relative;
+    background-color: @contentbackground;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#everything-but-header-and-footer {
+    height: 100%;
+}
+
+.sidebar-left {
+    width: @headerheight;
+    position: absolute;
+    left: 0;
+    top: @headerheight;
+    bottom: @footerheight;
+    padding: 0;
+    background-color: @headerbackground;
+    border-right: 8px solid @headeraccent;
+}
+
+.contentarea {
+    margin: 0 0 0 @headerheight; /* Make room for left sidebar */
+    padding: 0 1em;
+    pointer-events: auto;
+}
+
+.contentarea > h1 {
+    margin: 0;
+    padding: 1em 0 0 0;
+}
+.contentarea > p {
+    margin: 0;
+    padding: 1em 0 0 0;
+}
+
+#footer {
+    height: @footerheight;
+    padding: 1em;
+    background-color: @footerbackground;
+    text-align: center;
+}
+
+.push {
+    height: @footerheight;
+    clear: both;
+}
+
+.nav-list {
+    padding: 0;
+    margin: 0;
+    pointer-events: auto;
+}
+
+.nav-list > li {
+    padding: 1em;
+    list-style-type: none;
+    display: block;
+}
+
+.nav-list > li:nth-child(1) { background-color: extract(@nav-list-item1, 1);}
+.nav-list > li:nth-child(2) { background-color: extract(@nav-list-item2, 1);}
+.nav-list > li:nth-child(3) { background-color: extract(@nav-list-item3, 1);}
+.nav-list > li:nth-child(4) { background-color: extract(@nav-list-item4, 1);}
+.nav-list > li:nth-child(5) { background-color: extract(@nav-list-item5, 1);}
+
+.nav-list > li:nth-child(1):hover { background-color: extract(@nav-list-item1, 2);}
+.nav-list > li:nth-child(2):hover { background-color: extract(@nav-list-item2, 2);}
+.nav-list > li:nth-child(3):hover { background-color: extract(@nav-list-item3, 2);}
+.nav-list > li:nth-child(4):hover { background-color: extract(@nav-list-item4, 2);}
+.nav-list > li:nth-child(5):hover { background-color: extract(@nav-list-item5, 2);}
+
+.nav-list > li:nth-child(1):active { background-color: extract(@nav-list-item1, 3);}
+.nav-list > li:nth-child(2):active { background-color: extract(@nav-list-item2, 3);}
+.nav-list > li:nth-child(3):active { background-color: extract(@nav-list-item3, 3);}
+.nav-list > li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
+.nav-list > li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
+
