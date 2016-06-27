@@ -1,16 +1,4 @@
-@headerbackground: #a3c6e4;
-@headeraccent: #fff500;
-@footerbackground: #9aa5a5;
-@contentbackground: hsla(0, 100%, 74%, 100%);
-/*@contentbackground: #ff7979;*/
-@footerheight: 3em;
-@headerheight: 8em;
-
-@nav-list-item1: #fac5c5, #ff6a6a, #ff3434;
-@nav-list-item2: #a0dda0, #55db55, #00b900;
-@nav-list-item3: #7ab3e4, #2d8de0, #0065bc;
-@nav-list-item4: #81c8b5, #43cca7, #00986f;
-@nav-list-item5: #cb9de0, #c478e6, #a932de;
+@import "theme"; // theme.less
 
 * {
     /* Using the the universal selector
@@ -27,8 +15,8 @@ html {
 }
 
 body {
-    color: white;
     margin: 0; /* Remove white margin around body */
+    color: white;
     font-family:
         "Century Gothic",
         CenturyGothic,
@@ -36,24 +24,24 @@ body {
         sans-serif;
     min-height: 100%;
     height: 100%;
-    pointer-events: none;
+    background-color: @contentbackground;
 }
 
 header {
     margin: 0; /* prevent border collapse */
-    border-bottom: 8px solid @headeraccent;
+    border-bottom: @headeraccentwidth solid @headeraccent;
     color: white;
     text-align: left;
     background-color: @headerbackground;
-    padding: 1em;
+    padding: @headerpadding;
     height: @headerheight;
-    pointer-events: auto;
 }
 
 header > h1, header > h2 {
     text-align: left;
     margin: 0;
 }
+
 
 #everything-but-footer {
     /* A wrapper for everything but footer */
@@ -64,9 +52,6 @@ header > h1, header > h2 {
     negative footer height */
     margin: 0 auto -1 * @footerheight;
     position: relative;
-    background-color: @contentbackground;
-    pointer-events: none;
-    z-index: -1;
 }
 
 #everything-but-header-and-footer {
@@ -74,25 +59,42 @@ header > h1, header > h2 {
 }
 
 .sidebar-left {
-    width: @headerheight;
+    width: @sidebarwidth;
     position: absolute;
     left: 0;
     top: @headerheight;
     bottom: @footerheight;
     padding: 0;
-    background-color: @headerbackground;
-    border-right: 8px solid @headeraccent;
+    background-color: @sidebar;
+    /* border-right: 8px solid @headeraccent; */
 }
 
 .contentarea {
-    margin: 0 0 0 @headerheight; /* Make room for left sidebar */
+    margin: 0 0 0 @sidebarwidth; /* Make room for left sidebar */
     padding: 0 1em;
-    pointer-events: auto;
+    color: @contenttext;
+}
+
+@media (max-width: 1024px) {
+    header {
+        padding: 1em;
+        height: @headerheight * 0.5;
+    }
+    header > h1 { font-size: 1.5em; }
+    header > h2 { font-size: 1em; }
+    .sidebar-left {
+        width: @sidebarwidth * 0.5;
+        top: @headerheight * 0.5;
+    }
+    .contentarea {
+        margin: 0 0 0 @sidebarwidth * 0.5; /* Make room for left sidebar */
+    }
 }
 
 .contentarea > h1 {
     margin: 0;
     padding: 1em 0 0 0;
+    color: @contentheadertext;
 }
 .contentarea > p {
     margin: 0;
@@ -104,6 +106,7 @@ header > h1, header > h2 {
     padding: 1em;
     background-color: @footerbackground;
     text-align: center;
+    color: @footertext
 }
 
 .push {
@@ -114,7 +117,6 @@ header > h1, header > h2 {
 .nav-list {
     padding: 0;
     margin: 0;
-    pointer-events: auto;
 }
 
 .nav-list > li {
