@@ -1,5 +1,14 @@
 @import "theme"; // theme.less
 
+@headeraccentwidth: 4px;
+@headerpadding: 1em;
+@footerheight: 3em;
+@headerheight: 6em;
+@sidebarwidth: 8em;
+@maincontentwidth: 80%;
+@headeraccentwidth: 4px;
+@headerpadding: 1em;
+
 * {
     /* Using the the universal selector
     here is okay because it is only slow
@@ -9,22 +18,20 @@
             box-sizing: border-box;
 }
 
-html {
-    min-height: 100%;
-    height: 100%;
-}
-
 body {
     margin: 0; /* Remove white margin around body */
     color: white;
-    font-family:
-        "Century Gothic",
-        CenturyGothic,
-        AppleGothic,
-        sans-serif;
+    font-family: "Open Sans", Helvetica, Arial,
+        sans-serif; /* Regular Sans-serif */
     min-height: 100%;
     height: 100%;
     background-color: @contentbackground;
+}
+
+h1, h2, h3 {
+    font-family: "Open Sans Condensed", Helvetica,
+        Arial, sans-serif; /* Condensed sans-serif */
+    font-weight: 300;
 }
 
 header {
@@ -35,68 +42,53 @@ header {
     background-color: @headerbackground;
     padding: @headerpadding;
     height: @headerheight;
+    transition: height 0.5s;
+    transition: padding 0.5s;
 }
 
-header > h1, header > h2 {
+header h1, header h2 {
     text-align: left;
     margin: 0;
+    transition: font-size 0.5s;
 }
 
-
-#everything-but-footer {
-    /* A wrapper for everything but footer */
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Bottom margin is
-    negative footer height */
-    margin: 0 auto -1 * @footerheight;
-    position: relative;
-}
-
-#everything-but-header-and-footer {
-    height: 100%;
-}
+header h1 { font-size: 1.5em }
+header h2 { font-size: 1.0em }
 
 .sidebar-left {
     width: @sidebarwidth;
-    position: absolute;
-    left: 0;
-    top: @headerheight;
-    bottom: @footerheight;
+    float: left;
     padding: 0;
     background-color: @sidebar;
-    /* border-right: 8px solid @headeraccent; */
+    transition: width 0.5s;
 }
 
 .contentarea {
-    margin: 0 0 0 @sidebarwidth; /* Make room for left sidebar */
-    padding: 0 1em;
+    margin-left: @sidebarwidth;
+    padding: 2em;
     color: @contenttext;
+    background-color: @contentbackground;
+    transition: margin-left 0.5s;
 }
 
-@media (max-width: 1024px) {
+/* Mobile first */
+@media (min-width: 700px) {
     header {
-        padding: 1em;
-        height: @headerheight * 0.5;
+        padding: @headerpadding * 5;
+        height: @headerheight * 2;
     }
-    header > h1 { font-size: 1.5em; }
-    header > h2 { font-size: 1em; }
-    .sidebar-left {
-        width: @sidebarwidth * 0.5;
-        top: @headerheight * 0.5;
-    }
-    .contentarea {
-        margin: 0 0 0 @sidebarwidth * 0.5; /* Make room for left sidebar */
-    }
+    header h1 { font-size: 2em; }
+    header h2 { font-size: 1.5em; }
+    .sidebar-left { width: 8em; }
+    .contentarea { margin-left: 8em; }
 }
 
-.contentarea > h1 {
+.contentarea h1 {
     margin: 0;
     padding: 1em 0 0 0;
     color: @contentheadertext;
 }
-.contentarea > p {
+.contentarea p {
     margin: 0;
     padding: 1em 0 0 0;
 }
@@ -106,40 +98,39 @@ header > h1, header > h2 {
     padding: 1em;
     background-color: @footerbackground;
     text-align: center;
-    color: @footertext
+    color: @footertext;
+    border-top: 2px solid @footertopbordercolor;
 }
 
-.push {
-    height: @footerheight;
-    clear: both;
-}
+.push { clear: both; }
 
 .nav-list {
     padding: 0;
     margin: 0;
 }
 
-.nav-list > li {
+.nav-list li {
     padding: 1em;
+    margin-right: 0;
     list-style-type: none;
     display: block;
 }
 
-.nav-list > li:nth-child(1) { background-color: extract(@nav-list-item1, 1);}
-.nav-list > li:nth-child(2) { background-color: extract(@nav-list-item2, 1);}
-.nav-list > li:nth-child(3) { background-color: extract(@nav-list-item3, 1);}
-.nav-list > li:nth-child(4) { background-color: extract(@nav-list-item4, 1);}
-.nav-list > li:nth-child(5) { background-color: extract(@nav-list-item5, 1);}
+.nav-list li:nth-child(1) { background-color: extract(@nav-list-item1, 1);}
+.nav-list li:nth-child(2) { background-color: extract(@nav-list-item2, 1);}
+.nav-list li:nth-child(3) { background-color: extract(@nav-list-item3, 1);}
+.nav-list li:nth-child(4) { background-color: extract(@nav-list-item4, 1);}
+.nav-list li:nth-child(5) { background-color: extract(@nav-list-item5, 1);}
 
-.nav-list > li:nth-child(1):hover { background-color: extract(@nav-list-item1, 2);}
-.nav-list > li:nth-child(2):hover { background-color: extract(@nav-list-item2, 2);}
-.nav-list > li:nth-child(3):hover { background-color: extract(@nav-list-item3, 2);}
-.nav-list > li:nth-child(4):hover { background-color: extract(@nav-list-item4, 2);}
-.nav-list > li:nth-child(5):hover { background-color: extract(@nav-list-item5, 2);}
+.nav-list li:nth-child(1):hover { background-color: extract(@nav-list-item1, 2);}
+.nav-list li:nth-child(2):hover { background-color: extract(@nav-list-item2, 2);}
+.nav-list li:nth-child(3):hover { background-color: extract(@nav-list-item3, 2);}
+.nav-list li:nth-child(4):hover { background-color: extract(@nav-list-item4, 2);}
+.nav-list li:nth-child(5):hover { background-color: extract(@nav-list-item5, 2);}
 
-.nav-list > li:nth-child(1):active { background-color: extract(@nav-list-item1, 3);}
-.nav-list > li:nth-child(2):active { background-color: extract(@nav-list-item2, 3);}
-.nav-list > li:nth-child(3):active { background-color: extract(@nav-list-item3, 3);}
-.nav-list > li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
-.nav-list > li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
+.nav-list li:nth-child(1):active { background-color: extract(@nav-list-item1, 3);}
+.nav-list li:nth-child(2):active { background-color: extract(@nav-list-item2, 3);}
+.nav-list li:nth-child(3):active { background-color: extract(@nav-list-item3, 3);}
+.nav-list li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
+.nav-list li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
 
