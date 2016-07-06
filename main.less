@@ -55,32 +55,12 @@ header h1, header h2 {
 header h1 { font-size: 1.5em }
 header h2 { font-size: 1.0em }
 
-.sidebar-left {
-    width: @sidebarwidth;
-    float: left;
-    padding: 0;
-    background-color: @sidebar;
-    transition: width 0.5s;
-}
-
 .contentarea {
     margin-left: @sidebarwidth;
-    padding: 2em;
+    padding: 0 2em 2em 2em;
     color: @contenttext;
     background-color: @contentbackground;
     transition: margin-left 0.5s;
-}
-
-/* Mobile first */
-@media (min-width: 700px) {
-    header {
-        padding: @headerpadding * 5;
-        height: @headerheight * 2;
-    }
-    header h1 { font-size: 2em; }
-    header h2 { font-size: 1.5em; }
-    .sidebar-left { width: 8em; }
-    .contentarea { margin-left: 8em; }
 }
 
 .contentarea h1 {
@@ -102,35 +82,84 @@ header h2 { font-size: 1.0em }
     border-top: 2px solid @footertopbordercolor;
 }
 
-.push { clear: both; }
+.clear-both { clear: both; }
 
-.nav-list {
-    padding: 0;
-    margin: 0;
+/* This container is necessary to avoid odd
+behavior caused by floated elements. Boxes
+containing floated elements does not wrap
+neatly around them, instead it sort of
+overlaps them. */
+.sidebar-outer {
+    width: @sidebarwidth;
+    background-color: @sidebarbackground;
+    float: left;
 }
 
-.nav-list li {
+.sidebar-left {
+    margin: 0;
+    width: @sidebarwidth;
+    padding: 0;
+    transition: width 0.5s;
+}
+
+.sidebar-left li {
     padding: 1em;
     margin-right: 0;
     list-style-type: none;
     display: block;
+    /*border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: @contentbackground;*/
+    width: 100%;
+    text-align: left;
+    transition: width 0.5s;
 }
 
-.nav-list li:nth-child(1) { background-color: extract(@nav-list-item1, 1);}
-.nav-list li:nth-child(2) { background-color: extract(@nav-list-item2, 1);}
-.nav-list li:nth-child(3) { background-color: extract(@nav-list-item3, 1);}
-.nav-list li:nth-child(4) { background-color: extract(@nav-list-item4, 1);}
-.nav-list li:nth-child(5) { background-color: extract(@nav-list-item5, 1);}
+.sidebar-left li:nth-child(1) { background-color: extract(@nav-list-item1, 1);}
+.sidebar-left li:nth-child(2) { background-color: extract(@nav-list-item2, 1);}
+.sidebar-left li:nth-child(3) { background-color: extract(@nav-list-item3, 1);}
+.sidebar-left li:nth-child(4) { background-color: extract(@nav-list-item4, 1);}
+.sidebar-left li:nth-child(5) { background-color: extract(@nav-list-item5, 1);}
 
-.nav-list li:nth-child(1):hover { background-color: extract(@nav-list-item1, 2);}
-.nav-list li:nth-child(2):hover { background-color: extract(@nav-list-item2, 2);}
-.nav-list li:nth-child(3):hover { background-color: extract(@nav-list-item3, 2);}
-.nav-list li:nth-child(4):hover { background-color: extract(@nav-list-item4, 2);}
-.nav-list li:nth-child(5):hover { background-color: extract(@nav-list-item5, 2);}
+.sidebar-left li:nth-child(1):hover { background-color: extract(@nav-list-item1, 2);}
+.sidebar-left li:nth-child(2):hover { background-color: extract(@nav-list-item2, 2);}
+.sidebar-left li:nth-child(3):hover { background-color: extract(@nav-list-item3, 2);}
+.sidebar-left li:nth-child(4):hover { background-color: extract(@nav-list-item4, 2);}
+.sidebar-left li:nth-child(5):hover { background-color: extract(@nav-list-item5, 2);}
 
-.nav-list li:nth-child(1):active { background-color: extract(@nav-list-item1, 3);}
-.nav-list li:nth-child(2):active { background-color: extract(@nav-list-item2, 3);}
-.nav-list li:nth-child(3):active { background-color: extract(@nav-list-item3, 3);}
-.nav-list li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
-.nav-list li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
+.sidebar-left li:nth-child(1):active { background-color: extract(@nav-list-item1, 3);}
+.sidebar-left li:nth-child(2):active { background-color: extract(@nav-list-item2, 3);}
+.sidebar-left li:nth-child(3):active { background-color: extract(@nav-list-item3, 3);}
+.sidebar-left li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
+.sidebar-left li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
+    
+/* Mobile first */
+@media (min-width: 700px) {
+    header {
+        padding: @headerpadding * 1;
+        height: @headerheight * 2;
+    }
+    header h1 { font-size: 6em; }
+    header h2 { font-size: 1.5em; }
+    .sidebar-left { width: 8em; }
+    .contentarea {
+        margin-left: 8em;
+        margin-right: 8em;
+    }
+    .sidebar-outer {
+        width: 100%;
+        float: none;
+    }
+    .sidebar-left {
+        width: 100%;
+        float: none;
+    }
+    .sidebar-left li {
+        float: left;
+        width: 8em;
+        text-align: center;
+        border-bottom-width: 0;
+        border-bottom-style: solid;
 
+    }
+}
