@@ -133,8 +133,8 @@ overlaps them. */
 .sidebar-left li:nth-child(4):active { background-color: extract(@nav-list-item4, 3);}
 .sidebar-left li:nth-child(5):active { background-color: extract(@nav-list-item5, 3);}
     
-/* Mobile first */
-@media (min-width: 700px) {
+/* Mobile first, then this */
+@media (min-width: 768px) {
     header {
         padding: @headerpadding * 1;
         height: @headerheight * 2;
