@@ -8,6 +8,7 @@
 @maincontentwidth: 80%;
 @headeraccentwidth: 4px;
 @headerpadding: 1em;
+@buttonfont: "Lato", "Segoe UI Symbol", sans-serif;
 
 * {
     /* Using the the universal selector
@@ -56,7 +57,7 @@ header h1 { font-size: 1.5em }
 header h2 { font-size: 1.0em }
 
 .contentarea {
-    margin-left: @sidebarwidth;
+    margin-left: 0;
     padding: 0 2em 2em 2em;
     color: @contenttext;
     background-color: @contentbackground;
@@ -84,16 +85,61 @@ header h2 { font-size: 1.0em }
 
 .clear-both { clear: both; }
 
+.theme-btn {
+    float: right;
+    margin-top: 0;
+    background-color: #ffad17;
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    transition: 0.5s;
+    &:hover { background-color: #c68a1e; }
+    &:active { background-color: #ffc459; }
+}
+
+.openbtn {
+    font-family: @buttonfont;
+    font-size: 2em;
+    cursor: pointer;
+    float: left;
+    margin-right: 1em;
+}
+
+.closebtn {
+    font-family: @buttonfont;
+    position: absolute;
+    top: 0;
+    right: 0.5em;
+    right: 0.5em;
+    font-size: 2.5em !important;
+}
+
 /* This container is necessary to avoid odd
 behavior caused by floated elements. Boxes
 containing floated elements does not wrap
 neatly around them, instead it sort of
 overlaps them. */
 .sidebar-outer {
-    width: @sidebarwidth;
     background-color: @sidebarbackground;
+    width: @sidebarwidth;
     float: left;
+    
+    //Make a hidden side nav
+    float: none;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -8em;
+    overflow-x: hidden;
+    padding-top: 4em;
+    transition: 0.5s;
 }
+
 
 .sidebar-left {
     margin: 0;
@@ -146,10 +192,6 @@ overlaps them. */
         margin-left: 8em;
         margin-right: 8em;
     }
-    .sidebar-outer {
-        width: 100%;
-        float: none;
-    }
     .sidebar-left {
         width: 100%;
         float: none;
@@ -161,5 +203,23 @@ overlaps them. */
         border-bottom-width: 0;
         border-bottom-style: solid;
 
+    }
+    
+    //Make a hidden side nav
+    .sidebar-outer {
+        width: 100%;
+        float: none;
+        height: auto;
+        position: static;
+        z-index: auto;
+        top: auto;
+        left: auto;
+        overflow-x: auto;
+        transition: 0.5s;
+        padding-top: 0;
+    }
+    .openbtn, .closebtn { display: none; }
+    .theme-btn {
+        margin-top: 2em;
     }
 }
